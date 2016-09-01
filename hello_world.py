@@ -12,29 +12,14 @@ def say_hi():
 
 @app.route("/hello/<name>")
 def hello_person(name):
-    html = """
-        <h1>
-            Hello {}!
-        </h1>
-        <p>
-            Here's a picture of a kitten.  Awww...
-        </p>
-        <img src="http://placekitten.com/g/200/300">
-    """
-    return html.format(name.title())
+    
+    return render_template('template.html', first_name=name)
 @app.route("/jedi/<first_name>/<last_name>")
 def jedi_name(first_name, last_name):
      jediname = last_name[0:3] + first_name[0:2]
-
-     html = """
-            <h1>
-            Hello {} {}!
-        </h1>
-        <p>
-            Your jedi name is {}
-        </p>
-        """
-     return html.format(first_name.title(), last_name.title(), jediname.title())
+     return render_template('template_jedi.html', firstname=first_name, lastname=last_name, jediname=jediname)
+     
+     #return html.format(first_name.title(), last_name.title(), jediname.title())
 if __name__ == "__main__":
     app.run(host=environ['IP'],
             port=int(environ['PORT']))
